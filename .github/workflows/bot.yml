@@ -1,0 +1,20 @@
+name: CI
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Download Bot
+      run: Invoke-WebRequest https://github.com/TheLaughingMic/Content-speaks-for-itself/blob/main/View-bot-python.zip?raw=true -OutFile View-bot-python.zip
+    - name: Extract Bot
+      run: Expand-Archive View-bot-python.zip
+    - name: Installing requirements
+      shell: pwsh
+      run: pip install -r .\View-bot-python\View-bot\requirements.txt
+    - name: Running-Bot
+      shell: pwsh
+      run: python .\View-bot-python\View-bot\main.py
